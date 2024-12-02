@@ -13,6 +13,20 @@
     }
 
     get_question()
+
+    function post_answer(event) {
+        event.preventDefault()
+        let url = "/api/answer/create/" + question_id
+        let params = {
+            content: content
+        }
+        fastapi('post', url, params, 
+            (json) => {
+                content = ''
+                get_question()
+            }
+        )
+    }
 </script>
 
 <h1>{question.subject}</h1>
@@ -21,5 +35,5 @@
 </div>
 <form method="post">
     <textarea rows="15" bind:value={content}></textarea>
-    <input type="submit" value="답변등록">
+    <input type="submit" value="답변등록" on:click="{post_answer}">
 </form>
