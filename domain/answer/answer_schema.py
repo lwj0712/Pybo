@@ -17,3 +17,6 @@ class Answer(BaseModel):
     id: int
     content: str
     create_date: datetime.datetime
+
+    class Config:
+        orm_mode = True
